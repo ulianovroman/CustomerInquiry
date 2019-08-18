@@ -10,7 +10,7 @@ namespace CustomerInquiry.Domain.Dto
     /// </summary>
     public class CustomerRequest
     {
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         public string Email { get; set; }
     }
 }

@@ -13,6 +13,13 @@ namespace CustomerInquiry.DAL
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Customer>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
     }

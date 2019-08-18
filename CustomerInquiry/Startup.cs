@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CustomerInquiry.DAL;
+using CustomerInquiry.Domain.Interfaces;
+using CustomerInquiry.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,16 +37,13 @@ namespace CustomerInquiry
             });
 
             services.AddDbContext<CustomerContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:CustomersDb"]));
+
+            services.AddScoped<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -59,13 +58,6 @@ namespace CustomerInquiry
             });
 
             app.UseMvc();
-
-            //Migrate database
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<CustomerContext>();
-                context.Database.Migrate();
-            }
         }
     }
 }

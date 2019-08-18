@@ -17,6 +17,7 @@ namespace CustomerInquiry.DAL.Models
 
         [StringLength(maximumLength: 25)]
         [Required]
+        
         public string Email { get; set; }
 
         [StringLength(maximumLength: 30)]
