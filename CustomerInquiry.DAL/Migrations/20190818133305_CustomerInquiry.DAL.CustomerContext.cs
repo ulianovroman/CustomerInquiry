@@ -11,7 +11,7 @@ namespace CustomerInquiry.DAL.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<long>(nullable: false),
                     Email = table.Column<string>(maxLength: 25, nullable: false),
                     Name = table.Column<string>(maxLength: 30, nullable: false),
                     Mobile = table.Column<string>(maxLength: 10, nullable: false)
@@ -25,12 +25,12 @@ namespace CustomerInquiry.DAL.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<long>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<decimal>(nullable: false),
                     Currency = table.Column<string>(maxLength: 3, nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false)
+                    CustomerId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {

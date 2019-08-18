@@ -13,7 +13,7 @@ namespace CustomerInquiry.DAL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [StringLength(maximumLength: 25)]
         [Required]

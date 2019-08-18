@@ -14,7 +14,7 @@ namespace CustomerInquiry.DAL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
 
@@ -22,7 +22,7 @@ namespace CustomerInquiry.DAL.Models
         [Required]
         public string Currency { get; set; }
         public TransactionStatus Status { get; set; }
-        public int CustomerId { get; set; }
+        public long CustomerId { get; set; }
         public Customer Customer { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace CustomerInquiry.Domain.Services
         {
             if(request?.CustomerId == null && request?.Email == null)
             {
-                return null;
+                throw new ArgumentException(nameof(request));
             }
 
             IQueryable<Customer> query = _dbContext.Customers;
@@ -59,6 +59,8 @@ namespace CustomerInquiry.Domain.Services
                     Date = x.Date,
                     Status = x.Status
                 })
+                .OrderByDescending(x => x.Date)
+                .Take(5)
                 .ToListAsync();
             }
             

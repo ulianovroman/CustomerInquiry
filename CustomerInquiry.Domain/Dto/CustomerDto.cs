@@ -10,7 +10,7 @@ namespace CustomerInquiry.Domain.Dto
     /// </summary>
     public class CustomerDto
     {
-        public int CustomerId { get; set; }
+        public long CustomerId { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string Mobile { get; set; }

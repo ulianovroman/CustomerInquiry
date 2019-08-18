@@ -28,9 +28,13 @@ namespace CustomerInquiry
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                options.SerializerSettings.DateFormatString = "dd/MM/yyyy HH:mm";
+            }); ;
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
+            // Register the Swagger generator
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Customer Inquiry", Version = "v1" });

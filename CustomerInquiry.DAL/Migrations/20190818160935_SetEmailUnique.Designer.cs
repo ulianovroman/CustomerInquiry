@@ -23,7 +23,7 @@ namespace CustomerInquiry.DAL.Migrations
 
             modelBuilder.Entity("CustomerInquiry.DAL.Models.Customer", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<long>("Id");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -47,7 +47,7 @@ namespace CustomerInquiry.DAL.Migrations
 
             modelBuilder.Entity("CustomerInquiry.DAL.Models.Transaction", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<long>("Id");
 
                     b.Property<decimal>("Amount");
 
@@ -55,7 +55,7 @@ namespace CustomerInquiry.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(3);
 
-                    b.Property<int>("CustomerId");
+                    b.Property<long>("CustomerId");
 
                     b.Property<DateTime>("Date");
 
