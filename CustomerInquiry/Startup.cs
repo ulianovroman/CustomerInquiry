@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CustomerInquiry.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,6 +33,8 @@ namespace CustomerInquiry
             {
                 c.SwaggerDoc("v1", new Info { Title = "Customer Inquiry", Version = "v1" });
             });
+
+            services.AddDbContext<CustomerContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:CustomersDb"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,10 +53,19 @@ namespace CustomerInquiry
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer Inquiry V1");
+
+                //setup swagger page as start page
                 c.RoutePrefix = string.Empty;
             });
 
             app.UseMvc();
+
+            //Migrate database
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<CustomerContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }
